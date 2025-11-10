@@ -4,12 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script language="javascript">
+        var txta = prompt ("Enter any integer");
+
+        if(txta == null || txta == "" || isNaN(txta))
+            document.write("<font color='red'>You must enter a number</font>");
+        else if(txta % 2 == 0)
+            document.write("<font color='green'><b>" + txta + " is an even number</b></font>");
+        else
+            document.write("<font color='blue'><i>" + txta + " is an odd number</i></font>");
+</script>
 </head>
 <body>
-    <input type="text" name="a" id="a">
-
-    <script>
-        document.getElementById('a').value = "Hello World";
-    </script>
+    
 </body>
 </html>
