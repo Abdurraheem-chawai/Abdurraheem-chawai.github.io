@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <form input First name, last name, Email, phone number,--> 
+    <form action="/submit_form" method="post">
+        <label for="fname">First Name:</label><br>
+        <input type="text" id="fname" name="fname"><br>
+        <label for="lname">Last Name:</label><br>
+        <input type="text" id="lname" name="lname"><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email"><br>
+        <label for="phone">Phone Number:</label><br>
+        <input type="tel" id="phone" name="phone"><br><br>
+        <input type="submit" value="Submit">
+
+        <!-- <text area for comments> -->
+        <label for="comments">Comments:</label><br>
+        <textarea id="comments" name="comments" rows="4" cols="50"></textarea><br><br>
+        <input type="submit" value="Submit">    
+
+        <!-- <select reason for contact, support, business, personal> -->
+        <label for="reason">Reason for Contact:</label><br>
+        <select id="reason" name="reason">
+            <option value="support">Support</option>
+            <option value="business">Business</option>
+            <option value="personal">Personal</option>  
+        </select><br><br>
+
+        <!-- <radio box for contact method email, phone> -->
+        <label for="contact_method">Preferred Contact Method:</label><br>   
+        <input type="radio" id="contact_email" name="contact_method" value="email">
+        <label for="contact_email">Email</label><br>
+        <input type="radio" id="contact_phone" name="contact_method" value="phone">
+        <label for="contact_phone">Phone</label><br><br>    
+
+        <!-- <file submit-->
+        <label for="file_upload">Upload a File:</label><br>
+        <input type="file" id="file_upload" name="file_upload"><br><br>  
+    
+</body>
+</html>

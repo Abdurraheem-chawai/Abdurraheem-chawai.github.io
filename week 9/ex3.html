@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script language="javascript">
+        var txta = prompt ("Enter number A") ;
+        var txtb = prompt ("Enter number B");
+
+        if(txta == null || txta == "" || isNaN(txta) ) {
+            alert ("Number A is formatted incorrect ");
+        } else if(txtb == null || txtb == "" || isNaN(txtb) ) {
+            alert ("Number B is formatted incorrect ");
+        } else {
+        var result = parseFloat (txta) + parseFloat (txtb);
+        alert ("Result:\n" +
+            txta + " + " + txtb + " = " + result) ;}
+</script>
+</body>
+</html>
