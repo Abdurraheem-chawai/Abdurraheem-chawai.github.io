@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Mini calculator</title>
+<style>
+  /* styling */
+  body { font-family: Arial, Helvetica, sans-serif; padding: 20px; }
+  .calculator { max-width: 340px; margin: 24px auto; border: 1px solid #ccc; padding: 12px; border-radius: 4px; }
+  .calculator h2 { text-align: center; font-size: 18px; margin-bottom: 10px; }
+  .row { margin-bottom: 8px; }
+  label { display:block; font-size: 13px; margin-bottom:4px; }
+  input[type="number"], select, input[readonly] { width: 100%; padding: 6px 8px; font-size: 14px; box-sizing: border-box; }
+  input[type="button"] { width:100%; padding:8px; margin-top:8px; }
+  .error { color: #c00; font-size: 13px; margin-top:6px; }
+</style>
+<script>
+function calculate() {
+    var form = document.frmCal;
+    var aField = form.txta;
+    var bField = form.txtb;
+    var op = form.slto.value;
+    var rField = form.txtr;
+
+    rField.value = "";
+    // parse inputs
+    var a = parseFloat(aField.value);
+    var b = parseFloat(bField.value);
+
+    if (isNaN(a)) {
+        rField.value = "Error: a is not a number";
+        aField.focus();
+        return;
+    }
+    // For unary operators (like square root) b is optional; here we require b for binary ops
+    var needsB = (op !== "√" && op !== "^2");
+    if (needsB && isNaN(b)) {
+        rField.value = "Error: b is not a number";
+        bField.focus();
+        return;
+    }
+
+    // division or modulo by zero
+    if ((op === "/" || op === "%") && b === 0) {
+        rField.value = "Error: division/modulo by zero";
+        bField.focus();
+        return;
+    }
+
+    var result;
+    switch (op) {
+        case "+": result = a + b; break;
+        case "-": result = a - b; break;
+        case "*": result = a * b; break;
+        case "/": result = a / b; break;
+        case "%": result = a % b; break;
+        case "^": result = Math.pow(a, b); break;
+        case "^2": result = Math.pow(a, 2); break;
+        case "√":
+            if (a < 0) { rField.value = "Error: sqrt of negative"; return; }
+            result = Math.sqrt(a);
+            break;
+        default:
+            rField.value = "Error: unknown operator";
+            return;
+    }
+
+    if (!isFinite(result) || isNaN(result)) {
+        rField.value = "Error: invalid result";
+    } else {
+        // limit to reasonable precision
+        rField.value = Math.round(result * 1e12) / 1e12;
+    }
+}
+</script>
+</head>
+<body>
+<div class="calculator">
+<form name="frmCal">
+    <h2>MINI CALCULATOR</h2>
+
+    <div class="row">
+        <label for="txta">a =</label>
+        <input id="txta" name="txta" type="number" step="any" placeholder="First number" />
+    </div>
+
+    <div class="row">
+        <label for="txtb">b =</label>
+        <input id="txtb" name="txtb" type="number" step="any" placeholder="Second number (if needed)" />
+    </div>
+
+    <div class="row">
+        <label for="slto">Operator:</label>
+        <select id="slto" name="slto">
+            <option value="+">+ (Add)</option>
+            <option value="-">- (Subtract)</option>
+            <option value="*">* (Multiply)</option>
+            <option value="/">/ (Divide)</option>
+            <option value="%">% (Modulo)</option>
+            <option value="^">^ (Power a^b)</option>
+            <option value="^2">^2 (Square a)</option>
+            <option value="√">√ (Square root of a)</option>
+        </select>
+    </div>
+
+    <div class="row">
+        <label for="txtr">Result:</label>
+        <input id="txtr" name="txtr" readonly />
+    </div>
+
+    <input type="button" value="Calculate" onclick="calculate()" />
+</form>
+</div>
+</body>
+</html>

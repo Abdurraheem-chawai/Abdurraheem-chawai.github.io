@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Mini calculator</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; }
+  table { margin: 20px auto; border-collapse: collapse; }
+  td { padding: 8px; }
+  input, select { padding: 6px; width: 150px; }
+  input[readonly] { background-color: #f0f0f0; }
+  input[type="button"] { width: 100px; cursor: pointer; }
+</style>
+<script language="javascript">
+function calculate () {
+    var a = document.frmCal.txta;
+    var b = document.frmCal.txtb;
+    var o = document.frmCal.slto;
+    var r = document.frmCal.txtr;
+
+    var numberFormat = /^[+-]?\d+(\.\d+)?$/;
+    // validate a
+    if (numberFormat.test(a.value) == false) {
+        alert("a must be a number!");
+        a.focus();
+        return;
+    }
+    // Validate b
+    if (numberFormat.test(b.value) == false) {
+        alert("b must be a number!");
+        b.focus();
+        return;
+    }
+    // Check division/modulo by zero
+    if ((o.value == "/" || o.value == "%") && parseInt(b.value) == 0) {
+        alert("b can't be 0!");
+        r.value = "";
+        b.focus();
+        return;
+    }
+    // Calculate result
+    var numA = parseFloat(a.value);
+    var numB = parseFloat(b.value);
+    var result;
+    switch(o.value) {
+        case "+": result = numA + numB; break;
+        case "-": result = numA - numB; break;
+        case "*": result = numA * numB; break;
+        case "/": result = numA / numB; break;
+        case "%": result = numA % numB; break;
+        case "^": result = Math.pow(numA, numB); break;
+        default: result = 0;
+    }
+    r.value = result;
+}
+</script>
+</head>
+<body>
+<form name="frmCal">
+    <table border="0" align="center">
+        <tr><td colspan="2" align="center">
+            <h2>MINI CALCULATOR</h2></td></tr>
+        <tr><td align="right">a = </td>
+            <td><input name="txta" type="number" step="any" /></td></tr>
+        <tr><td align="right">b = </td>
+            <td><input name="txtb" type="number" step="any" /></td></tr>
+        <tr><td align="right">Operator: </td>
+            <td><select name="slto">
+                    <option value="+">+</option>
+                    <option value="-">-</option>
+                    <option value="*">*</option>
+                    <option value="/">/</option>
+                    <option value="%">%</option>
+                    <option value="^">^ (Power)</option>
+                </select>
+            </td></tr>
+        <tr><td align="right">Result: </td>
+            <td><input name="txtr" readonly /></td></tr>
+        <tr><td colspan="2" align="center">
+            <input type="button" value="Calculate" onClick="calculate()">
+        </td></tr>
+    </table>
+</form>
+</body>
+</html>
