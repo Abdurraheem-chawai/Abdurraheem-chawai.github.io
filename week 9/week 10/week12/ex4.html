@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Interactive Date Display</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; }
+    .container { max-width: 700px; margin: 0 auto; text-align: center; }
+    #demo { margin-top: 16px; }
+    button { cursor: pointer; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>JavaScript HTML Events</h1>
+  <h2>The onclick Event</h2>
+
+  <p>Click "press to displayDate() function.</p>
+  <button id="myBtn">Try it</button>
+
+  <p id="demo"></p>
+</div>
+
+<script>
+document.getElementById("myBtn").addEventListener("click", displayDate);
+
+function displayDate() {
+  document.getElementById("demo").textContent = Date();
+}
+</script>
+
+</body>
+</html>

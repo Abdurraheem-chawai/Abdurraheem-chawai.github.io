@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Cookie Check</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; padding: 40px; }
+    #demo { margin-top: 1rem; }
+  </style>
+</head>
+<body>
+
+<h1>JavaScript HTML Events</h1>
+<h2>Exercise 5 The onload Attribute</h2>
+
+<p id="demo"></p>
+
+<script>
+/* run on load */
+window.addEventListener('load', checkCookies);
+
+/* try a quick cookie write/read as a fallback */
+function testCookie() {
+  try {
+    document.cookie = "ck_test=1; max-age=60; path=/";
+    return document.cookie.indexOf("ck_test=") !== -1;
+  } catch (e) {
+    return false;
+  }
+}
+
+function checkCookies() {
+  // navigator.cookieEnabled is usually fine, but some browsers/extensions block cookies
+  const enabled = navigator.cookieEnabled || testCookie();
+  document.getElementById("demo").textContent =
+    enabled ? "Cookies are enabled." : "Cookies are not enabled.";
+}
+</script>
+
+</body>
+</html>
+
+

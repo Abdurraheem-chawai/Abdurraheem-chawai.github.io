@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>JavaScript HTML Events</h1>
+<h2>The onclick Attribute</h2>
+
+<p>Click button to display the date.</p>
+<button onclick="displayDate()">The time says?</button>
+
+<script>
+function displayDate() {
+  const now = new Date();
+  const english = Date(); // same output as before
+  const arabic = new Intl.DateTimeFormat('ar-SA', {
+    dateStyle: 'full',
+    timeStyle: 'medium'
+  }).format(now);
+
+  document.getElementById("demo").innerHTML =
+    "English: " + english + "<br>العربية: " + arabic;
+}
+</script>
+
+<p id="demo"></p>
+
+</body>
+</html>
