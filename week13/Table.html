@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
+    <title>Document </title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        
+    </style>
+</head>
+<body>
+    <table id="TableA">
+        <tr>
+            <td>name</td>
+            <td>price</td>
+            <td>Valuation</td>
+        </tr>
+        <tr>
+            <td>RAM DDR4 8GB </td>
+            <td>80000</td>
+            <td>4.0/5</td>td> 
+        </tr>
+        <tr>
+            <td>SSD 256GB</td>
+            <td>120000</td>
+            <td>4.8/5</td>
+        </tr>          
+    </table>
+    <button onclick="changecolor()">change color</button> 
+    <button onclick="sortTable()">sort by price</button>
+
+    <script>
+        let isRed = false;
+
+        function changecolor() {
+            const table = document.getElementById('TableA');
+            table.style.color = isRed ? 'green' : 'red';
+            isRed = !isRed;
+        }
+
+        function sortTable() {
+            const table = document.getElementById('TableA');
+            const rows = array .from(table.rows).slice(1); 
+            rows.sort((a, b) => {
+                const priceA = parseInt(a.cells[1].innerText);
+                const priceB = parseInt(b.cells[1].innerText);
+                return priceA - priceB;
+            });
+            rows.forEach(row => table.appendChild(row));
+        }
+    </script>
+</body>
+</html>
