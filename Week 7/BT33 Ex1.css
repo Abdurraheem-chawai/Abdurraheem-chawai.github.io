@@ -1,0 +1,40 @@
+.menu div {
+    width: 150px;
+    height: 32px;
+    background: linear-gradient(to right, #333, #999, #ff9800);
+    border-radius: 20px 20px 0 0;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+    text-transform: uppercase;
+    font-size: 20px;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.menu ul {
+    list-style: inside url('img/bullet.png');
+    box-shadow: 5px 5px 10px #000;
+    border: 1px solid #000;
+    width: 148px;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    border-radius: 0 0 20px 20px;
+}
+
+.menu li {
+    padding: 5px;
+    width: 138px;
+    cursor: pointer;
+    text-transform: capitalize;
+    transition: background 0.2s, color 0.2s;
+}
+
+.menu li:hover {
+    background-color: #ff9;
+    font-weight: bold;
+    color: #f00;
+}

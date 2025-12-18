@@ -1,0 +1,87 @@
+#header {
+    background: url(images/header.jpg);
+    height: 181px;
+    width: 900px;
+    margin-left: 20%;
+    margin-right: 25%;
+    border-radius: 10px;
+    overflow: visible;
+}
+
+#logo {
+    padding: 20px 0 0 50px;
+}
+
+#menu_top {
+    margin-top: 55px;
+    margin-left: 30px;
+    background: #ffffff;
+    height: 40px;
+    opacity: 0.6;
+    border-radius: 10px 0px 0px 10px;
+    position: relative;
+    z-index: 2;
+}
+
+.level1 {
+    list-style-type: none;
+    padding-top: 12px;
+    margin: 0;
+}
+
+.level1 li {
+    display: inline;
+    float: left;
+    padding: 0px 20px 0px 0px;
+    height: 27px;
+    font-weight: bold;
+    position: relative;
+}
+
+.level1 li a,
+.level1 li a:visited {
+    color: #b22222;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: 'Times New Roman', Times, serif;
+    transition: color 0.2s;
+}
+
+.level1 li a:hover {
+    color: green;
+}
+
+.level2 {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    padding: 0px;
+    margin-top: 5px;
+    min-width: 170px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    z-index: 10;
+}
+
+.level1 li:hover > .level2 {
+    display: block;
+}
+
+.level2 li {
+    float: none;
+    position: relative;
+    display: block;
+    padding: 10px;
+    height: auto;
+    background: #ccc;
+    color: #444;
+    font-size: 18px;
+    font-family: 'Times New Roman', Times, serif;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.level2 li:hover {
+    background: #CC0;
+    color: #444;
+}
