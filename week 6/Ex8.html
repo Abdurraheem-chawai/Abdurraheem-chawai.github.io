@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Newsletter Subscription</title>
+<style>
+  :root{--gap:12px;--max:520px}
+  body{font-family:system-ui,Segoe UI,Arial,Helvetica,sans-serif;display:flex;justify-content:center;padding:28px}
+  form{width:100%;max-width:var(--max);border:1px solid #ddd;padding:16px;border-radius:6px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--gap)}
+  .full{grid-column:1/-1}
+  label{display:block;font-weight:600;margin-bottom:6px}
+  input[type="text"],input[type="email"],textarea{width:100%;padding:8px;border:1px solid #ccc;border-radius:4px}
+  fieldset{border:1px solid #eee;padding:10px;border-radius:6px}
+  .row{display:flex;gap:12px;align-items:center;margin-top:12px}
+  button{padding:8px 12px;border:none;background:#2b7cff;color:#fff;border-radius:4px;cursor:pointer}
+  .error{color:#d9534f;font-size:0.9rem;margin-top:6px}
+  .success{color:#28a745;font-weight:700}
+</style>
+</head>
+<body>
+<form id="subForm" novalidate>
+  <div class="grid">
+    <div>
+      <label for="name">Full Name</label>
+      <input id="name" name="name" type="text" required>
+      <div id="nameErr" class="error" aria-live="polite"></div>
+    </div>
+
+    <div>
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" required>
+      <div id="emailErr" class="error" aria-live="polite"></div>
+    </div>
+
+    <div class="full">
+      <fieldset>
+        <legend>Subscription Type</legend>
+        <label><input type="radio" name="plan" value="monthly" checked> Monthly</label>
+        <label style="margin-left:10px"><input type="radio" name="plan" value="yearly"> Yearly</label>
+      </fieldset>
+    </div>
+
+    <div class="full">
+      <fieldset>
+        <legend>Interests (select at least one)</legend>
+        <label><input type="checkbox" name="interest" value="tech"> Technology</label>
+        <label style="margin-left:10px"><input type="checkbox" name="interest" value="deals"> Deals</label>
+        <label style="margin-left:10px"><input type="checkbox" name="interest" value="events"> Events</label>
+        <div id="interestErr" class="error" aria-live="polite"></div>
+      </fieldset>
+    </div>
+  </div>
+
+  <div class="row">
+    <button type="submit">Subscribe</button>
+    <div id="status" aria-live="polite"></div>
+  </div>
+</form>
+
+<script>
+console.log('Newsletter script loaded');
+const form = document.getElementById('subForm');
+const nameEl = document.getElementById('name');
+const emailEl = document.getElementById('email');
+const nameErr = document.getElementById('nameErr');
+const emailErr = document.getElementById('emailErr');
+const interestErr = document.getElementById('interestErr');
+const status = document.getElementById('status');
+
+function validEmail(v){
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+}
+
+form.addEventListener('submit', e=>{
+  e.preventDefault();
+  [nameErr,emailErr,interestErr,status].forEach(el=>{ el.textContent=''; el.className=''; });
+  let ok = true;
+
+  if(!nameEl.value.trim()){ nameErr.textContent='Please enter your name.'; ok = false; }
+  if(!emailEl.value.trim() || !validEmail(emailEl.value.trim())){ emailErr.textContent='Enter a valid email (contains @ and domain).'; ok = false; }
+
+  const interests = Array.from(form.querySelectorAll('input[name="interest"]:checked'));
+  if(interests.length === 0){ interestErr.textContent='Select at least one interest.'; ok = false; }
+
+  if(!ok) return;
+
+  status.className = 'success';
+  status.textContent = 'Subscription successful — thank you!';
+  form.reset();
+});
+</script>
+</body>
+</html>

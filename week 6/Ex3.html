@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Grades</title>
+<style>
+table{border-collapse:collapse;margin:20px auto;width:360px}
+th,td{border:1px solid #000;padding:8px}
+tbody tr:nth-child(odd){background:#f4f4f4}
+button{display:block;margin:12px auto}
+input.grade{width:70px}
+.result{text-align:center;font-weight:700}
+</style>
+</head>
+<body>
+<h1 style="text-align:center">Student Grades &reg; &sect; &ge;</h1>
+
+<table id="grades">
+<thead><tr><th>Subject</th><th>Grade</th></tr></thead>
+<tbody>
+  <tr><td>Math</td><td><input class="grade" type="number" min="0" max="100" value="85"></td></tr>
+  <tr><td>English</td><td><input class="grade" type="number" min="0" max="100" value="90"></td></tr>
+  <tr><td>Science</td><td><input class="grade" type="number" min="0" max="100" value="78"></td></tr>
+  <tr><td>History</td><td><input class="grade" type="number" min="0" max="100" value="88"></td></tr>
+</tbody>
+</table>
+
+<button onclick="calculateAverage()">Calculate Average</button>
+<div id="avg" class="result" aria-live="polite"></div>
+
+<script>
+function calculateAverage(){
+  const nums = [...document.querySelectorAll('input.grade')].map(i=>Number(i.value)||0);
+  const avg = nums.reduce((s,n)=>s+n,0)/nums.length;
+  document.getElementById('avg').textContent = `Average: ${avg.toFixed(2)}%`;
+}
+</script>
+</body>
+</html>

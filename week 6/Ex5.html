@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tabbed Content Interface</title>
+<style>
+  body{font-family:Arial;padding:40px;background:#f4f6f8}
+  .tabs{display:flex;border-bottom:2px solid #ccc;margin-bottom:20px}
+  .tab{padding:12px 20px;cursor:pointer;border:1px solid #ccc;border-bottom:none;background:#e0e0e0;margin-right:5px;display:flex;align-items:center;gap:6px;font-weight:700}
+  .tab.active{background:#fff;color:#007bff}
+  .tab .arrow{display:none}
+  .tab.active .arrow{display:inline}
+  .content{display:none;padding:20px;border:1px solid #ccc;background:#fff}
+  .content.active{display:block}
+</style>
+</head>
+<body>
+
+<nav class="tabs" role="tablist">
+  <button class="tab active" role="tab" aria-selected="true" onclick="switchTab(this,'features')">Features &reg; <span class="arrow">→</span></button>
+  <button class="tab" role="tab" aria-selected="false" onclick="switchTab(this,'pricing')">Pricing &euro; <span class="arrow">→</span></button>
+  <button class="tab" role="tab" aria-selected="false" onclick="switchTab(this,'reviews')">Reviews <span class="arrow">→</span></button>
+  <button class="tab" role="tab" aria-selected="false" onclick="switchTab(this,'support')">Support <span class="arrow">→</span></button>
+</nav>
+
+<div id="features" class="content active">
+  <h3>Features</h3>
+  <p>Our product includes advanced features for productivity.</p>
+</div>
+
+<div id="pricing" class="content">
+  <h3>Pricing</h3>
+  <p>Affordable pricing plans for individuals and businesses.</p>
+</div>
+
+<div id="reviews" class="content">
+  <h3>Reviews</h3>
+  <p>Users love our platform and its performance.</p>
+</div>
+
+<div id="support" class="content">
+  <h3>Support</h3>
+  <p>24/7 customer support available for all users.</p>
+</div>
+
+<script>
+function switchTab(tabEl, tabId){
+  // remove active state from all tabs & contents
+  document.querySelectorAll('.tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+  document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+
+  // add active state to clicked tab and corresponding content
+  tabEl.classList.add('active');
+  tabEl.setAttribute('aria-selected','true');
+  document.getElementById(tabId).classList.add('active');
+}
+</script>
+
+</body>
+</html>

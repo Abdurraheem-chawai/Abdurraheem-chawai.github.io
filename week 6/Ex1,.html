@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Flexbox Form Container */
+        .form-container {
+            background: #ffffff;
+            padding: 25px;
+            width: 350px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .strength {
+            font-weight: bold;
+        }
+
+        .weak {
+            color: red;
+        }
+
+        .medium {
+            color: orange;
+        }
+
+        .strong {
+            color: green;
+        }
+
+        button {
+            padding: 12px;
+            background: #007bff;
+            color: white;
+            border: none;
+            font-size: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .error {
+            color: red;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+
+<form class="form-container" onsubmit="return validateForm()">
+    <h2>Register</h2>
+
+    <label>Username</label>
+    <input type="text" id="username" placeholder="Enter username">
+    <div id="usernameError" class="error"></div>
+
+    <label>Password</label>
+    <input type="password" id="password" placeholder="Enter password" oninput="checkStrength()">
+    <div id="strengthText" class="strength"></div>
+    <div id="passwordError" class="error"></div>
+
+    <label>Profile Picture</label>
+    <input type="file" id="image" accept=".jpg,.jpeg,.png">
+    <div id="imageError" class="error"></div>
+
+    <button type="submit">Register</button>
+</form>
+
+<script>
+    function checkStrength() {
+        const password = document.getElementById("password").value;
+        const strengthText = document.getElementById("strengthText");
+
+        let hasLetters = /[a-zA-Z]/.test(password);
+        let hasNumbers = /\d/.test(password);
+
+        if (password.length < 6) {
+            strengthText.textContent = "Weak password";
+            strengthText.className = "strength weak";
+        } else if (hasLetters && hasNumbers && password.length >= 8) {
+            strengthText.textContent = "Strong password";
+            strengthText.className = "strength strong";
+        } else {
+            strengthText.textContent = "Medium password";
+            strengthText.className = "strength medium";
+        }
+    }
+
+    function validateForm() {
+        let valid = true;
+
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        const image = document.getElementById("image").files[0];
+
+        document.getElementById("usernameError").textContent = "";
+        document.getElementById("passwordError").textContent = "";
+        document.getElementById("imageError").textContent = "";
+
+        /* Username validation */
+        if (username.length < 5 || username.length > 15) {
+            document.getElementById("usernameError").textContent =
+                "Username must be 5–15 characters";
+            valid = false;
+        }
+
+        /* Password validation */
+        if (!(/[a-zA-Z]/.test(password) && /\d/.test(password))) {
+            document.getElementById("passwordError").textContent =
+                "Password must contain letters and numbers";
+            valid = false;
+        }
+
+        /* Image validation */
+        if (!image) {
+            document.getElementById("imageError").textContent =
+                "Please upload an image";
+            valid = false;
+        } else {
+            const allowedTypes = ["image/jpeg", "image/png"];
+            if (!allowedTypes.includes(image.type)) {
+                document.getElementById("imageError").textContent =
+                    "Only JPG or PNG images are allowed";
+                valid = false;
+            }
+        }
+
+        return valid;
+    }
+</script>
+
+</body>
+</html>

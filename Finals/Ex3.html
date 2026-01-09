@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Contact</title>
+<style>
+  body{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:center;padding:28px}
+  form{width:100%;max-width:520px;border:1px solid #ddd;padding:16px;border-radius:6px}
+  .field{margin-bottom:12px}
+  label{display:block;font-weight:600;margin-bottom:6px}
+  input,textarea{width:100%;padding:8px;border:1px solid #ccc;border-radius:4px}
+  textarea{min-height:120px;resize:vertical}
+  button{padding:10px 14px;border:none;background:#2b7cff;color:#fff;border-radius:4px;cursor:pointer}
+  .status{margin-top:12px;font-weight:700;color:#28a745}
+</style>
+</head>
+<body>
+<form id="contactForm" novalidate>
+  <h2>Contact Us</h2>
+
+  <div class="field">
+    <label for="name">Name</label>
+    <input id="name" name="name" type="text">
+  </div>
+
+  <div class="field">
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email">
+  </div>
+
+  <div class="field">
+    <label for="message">Message</label>
+    <textarea id="message" name="message"></textarea>
+  </div>
+
+  <button type="submit">Submit</button>
+  <div id="status" class="status" aria-live="polite"></div>
+</form>
+
+<script>
+const form = document.getElementById('contactForm');
+const nameEl = document.getElementById('name');
+const emailEl = document.getElementById('email');
+const msgEl = document.getElementById('message');
+const status = document.getElementById('status');
+
+function validEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+form.addEventListener('submit', e => {
+  e.preventDefault();
+  status.textContent = '';
+
+  if (!nameEl.value.trim()) { alert('Please enter your name.'); nameEl.focus(); return; }
+  if (!emailEl.value.trim()) { alert('Please enter your email.'); emailEl.focus(); return; }
+  if (!validEmail(emailEl.value.trim())) { alert('Please enter a valid email address.'); emailEl.focus(); return; }
+  if (!msgEl.value.trim()) { alert('Please enter a message.'); msgEl.focus(); return; }
+
+  status.textContent = 'Message sent — thank you!';
+  form.reset();
+});
+</script>
+</body>
+</html>

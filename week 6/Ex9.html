@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Product Showcase</title>
+<style>
+  :root{--gap:14px;--card-w:220px}
+  body{font-family:Arial,Helvetica,sans-serif;display:flex;justify-content:center;padding:28px}
+  .wrap{max-width:980px;width:100%}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(var(--card-w),1fr));gap:var(--gap)}
+  .card{
+    background:#fff;border-radius:8px;padding:14px;box-shadow:0 6px 18px rgba(0,0,0,.08);
+    transition:transform .18s ease,box-shadow .18s ease;display:flex;flex-direction:column;gap:8px;
+  }
+  .card:hover{transform:translateY(-6px);box-shadow:0 14px 30px rgba(0,0,0,.12)}
+  .meta{font-size:.9rem;color:#555}
+  .name{font-weight:700}
+  .price{font-weight:800;color:#111}
+  .desc{font-size:.95rem;color:#333;margin-top:6px;flex:1}
+  .actions{display:flex;justify-content:space-between;align-items:center}
+  button{padding:8px 12px;border:none;border-radius:6px;background:#0a66ff;color:#fff;cursor:pointer}
+  a.view{color:#0a66ff;text-decoration:none;font-weight:600}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div style="text-align:center;margin-bottom:12px">
+    <button id="toggleBtn" onclick="togglePrice()">Toggle Price</button>
+  </div>
+
+  <section class="grid" aria-label="Products">
+    <article class="card">
+      <div class="name">Alpha Reader ®</div>
+      <div class="meta"><span class="price">&euro;49</span></div>
+      <p class="desc">Compact e-reader with long battery life.</p>
+      <div class="actions"><a class="view" href="#">View &rarr;</a></div>
+    </article>
+
+    <article class="card">
+      <div class="name">Studio Headset</div>
+      <div class="meta"><span class="price">&euro;79</span></div>
+      <p class="desc">Comfortable, high-fidelity audio for creators.</p>
+      <div class="actions"><a class="view" href="#">View &rarr;</a></div>
+    </article>
+
+    <article class="card">
+      <div class="name">Pro Camera ®</div>
+      <div class="meta"><span class="price">&euro;499</span></div>
+      <p class="desc">Mirrorless camera with fast autofocus.</p>
+      <div class="actions"><a class="view" href="#">View &rarr;</a></div>
+    </article>
+
+    <article class="card">
+      <div class="name">City Scooter</div>
+      <div class="meta"><span class="price">&euro;229</span></div>
+      <p class="desc">Lightweight, foldable scooter for urban commute.</p>
+      <div class="actions"><a class="view" href="#">View &rarr;</a></div>
+    </article>
+  </section>
+</main>
+
+<script>
+function togglePrice(){
+  const prices = document.getElementsByClassName('price');
+  // determine current visibility from the first price
+  const hidden = window.getComputedStyle(prices[0]).display === 'none';
+  for(let i=0;i<prices.length;i++) prices[i].style.display = hidden ? '' : 'none';
+  document.getElementById('toggleBtn').textContent = hidden ? 'Hide Prices' : 'Show Prices';
+}
+</script>
+</body>
+</html>

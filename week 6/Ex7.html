@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Contact</title>
+<style>
+  body{font-family:Arial,sans-serif;padding:28px;display:flex;justify-content:center}
+  form{width:100%;max-width:520px;border:1px solid #ddd;padding:18px;border-radius:6px}
+  .field{display:flex;flex-direction:column;margin-bottom:12px}
+  label{font-weight:600;margin-bottom:6px}
+  input,textarea{padding:8px;border:1px solid #ccc;border-radius:4px;font-size:1rem}
+  textarea{min-height:100px;resize:vertical}
+  .row{display:flex;gap:12px;align-items:center}
+  button{padding:10px 14px;border:none;background:#2b7cff;color:#fff;border-radius:4px;cursor:pointer}
+  .error{color:#d9534f;font-size:0.9rem;margin-top:6px}
+  .success{color:#28a745;font-weight:700;margin-top:6px}
+</style>
+</head>
+<body>
+<form id="contactForm" novalidate>
+  <h2>Contact Us</h2>
+
+  <div class="field">
+    <label for="name">Name</label>
+    <input id="name" name="name" type="text" required>
+    <div id="nameErr" class="error" aria-live="polite"></div>
+  </div>
+
+  <div class="field">
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" required>
+    <div id="emailErr" class="error" aria-live="polite"></div>
+  </div>
+
+  <div class="field">
+    <label for="message">Message</label>
+    <textarea id="message" name="message" required></textarea>
+    <div id="msgErr" class="error" aria-live="polite"></div>
+  </div>
+
+  <div class="row">
+    <button type="submit">Submit</button>
+    <div id="status" aria-live="polite"></div>
+  </div>
+</form>
+
+<script>
+const form = document.getElementById('contactForm');
+const nameInput = document.getElementById('name');
+const emailInput = document.getElementById('email');
+const msgInput = document.getElementById('message');
+const nameErr = document.getElementById('nameErr');
+const emailErr = document.getElementById('emailErr');
+const msgErr = document.getElementById('msgErr');
+const status = document.getElementById('status');
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  [nameErr,emailErr,msgErr,status].forEach(n => { n.textContent = ''; n.className = ''; });
+  let valid = true;
+
+  if (!nameInput.value.trim()) { nameErr.textContent = 'Please enter your name.'; valid = false; }
+  if (!emailInput.value.trim()) { emailErr.textContent = 'Please enter your email.'; valid = false; }
+  else if (!emailInput.checkValidity()) { emailErr.textContent = 'Please enter a valid email.'; valid = false; }
+  if (!msgInput.value.trim()) { msgErr.textContent = 'Please enter a message.'; valid = false; }
+
+  if (!valid) return;
+
+  status.className = 'success';
+  status.textContent = 'Message sent — thank you!';
+  form.reset();
+});
+</script>
+</body>
+</html>

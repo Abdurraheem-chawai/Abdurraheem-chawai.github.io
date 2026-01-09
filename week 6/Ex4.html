@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Menu</title>
+<style>
+body{font-family:Arial,margin:20px auto;max-width:520px}
+.section{margin:12px 0}
+.menu-item{display:flex;justify-content:space-between;padding:6px;border-bottom:1px solid #eee}
+button{display:block;margin:10px auto}
+.veg::after{content:" • veg";font-style:italic;color:#555;margin-left:8px}
+</style>
+</head>
+<body>
+<h1 style="text-align:center">Restaurant Menu</h1>
+<button id="filterBtn" data-veg="0" onclick="filterMenu()">Show Vegetarian Only</button>
+
+<section class="section"><h2>Appetizers &reg;</h2>
+  <div class="menu-item veg"><span>Bruschetta</span><span>&ge;5.99</span></div>
+  <div class="menu-item"><span>Chicken Wings</span><span>&ge;7.99</span></div>
+</section>
+
+<section class="section"><h2>Main Course &sect;</h2>
+  <div class="menu-item"><span>Grilled Steak</span><span>&ge;18.99</span></div>
+  <div class="menu-item veg"><span>Veggie Pasta</span><span>&ge;12.50</span></div>
+</section>
+
+<section class="section"><h2>Desserts</h2>
+  <div class="menu-item veg"><span>Fruit Salad</span><span>&ge;6.00</span></div>
+  <div class="menu-item"><span>Chocolate Cake</span><span>&ge;6.50</span></div>
+</section>
+
+<section class="section"><h2>Drinks</h2>
+  <div class="menu-item"><span>Cola</span><span>&ge;2.50</span></div>
+  <div class="menu-item veg"><span>Herbal Tea</span><span>&ge;3.00</span></div>
+</section>
+
+<script>
+function filterMenu(){
+  var btn=document.getElementById('filterBtn'),
+      showingVeg = btn.dataset.veg==='1',
+      items = document.getElementsByClassName('menu-item');
+  for(var i=0;i<items.length;i++){
+    var isVeg = items[i].classList.contains('veg');
+    items[i].style.display = (!showingVeg && !isVeg) ? 'none' : '';
+  }
+  btn.dataset.veg = showingVeg ? '0' : '1';
+  btn.textContent = showingVeg ? 'Show Vegetarian Only' : 'Show All Items';
+}
+</script>
+</body>
+</html>
