@@ -2,6 +2,10 @@ import express, { Request, Response } from 'express';
 import cors from 'cors';
 import { PrismaClient } from '@prisma/client';
 import authRoutes from './routes/authRoutes';
+import productRoutes from './routes/productRoutes';
+import supplierRoutes from './routes/supplierRoutes';
+import inventoryRoutes from './routes/inventoryRoutes';
+import salesRoutes from './routes/salesRoutes';
 
 const app = express();
 const prisma = new PrismaClient();
@@ -12,6 +16,10 @@ app.use(express.json());
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/products', productRoutes);
+app.use('/api/suppliers', supplierRoutes);
+app.use('/api/inventory', inventoryRoutes);
+app.use('/api/sales', salesRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req: Request, res: Response) => {
