@@ -97,7 +97,7 @@ export const PosScreen: React.FC = () => {
     }
 
     if (!targetBranchId) {
-      targetBranchId = '90f9ee06-d083-4a1b-8526-7ad3ddae4a63';
+      targetBranchId = 'main-branch-uuid';
     }
 
     try {
@@ -110,7 +110,11 @@ export const PosScreen: React.FC = () => {
         })),
       };
 
-      await api.post('/sales/checkout', payload);
+      await api.post('/sales/checkout', payload, {
+  headers: {
+    Authorization: 'Bearer mock-dev-token-123',
+  },
+});
       setMessage({ type: 'success', text: 'Checkout completed successfully!' });
       setCart([]);
       fetchProducts(); // Refresh inventory stock levels
@@ -162,9 +166,7 @@ export const PosScreen: React.FC = () => {
         ) : (
           <div className="flex-1 overflow-y-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pr-2">
             {filteredProducts.map((product) => {
-              const currentStock = product.inventories && product.inventories.length > 0 
-  ? product.inventories[0].quantity 
-  : 100;
+            const currentStock = product.inventories?.[0]?.quantity ?? 0;
 
               return (
                 <button

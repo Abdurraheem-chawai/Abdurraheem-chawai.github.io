@@ -1,6 +1,5 @@
 import { Router, Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
-import { authenticateToken } from '../middleware/authMiddleware';
 
 const router = Router();
 const prisma = new PrismaClient();
@@ -20,18 +19,8 @@ router.get('/', async (req: Request, res: Response) => {
   }
 });
 
-// GET /api/branches - Get all branches
-router.get('/branches', async (req: Request, res: Response) => {
-  try {
-    const branches = await prisma.branch.findMany();
-    res.json(branches);
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch branches' });
-  }
-});
-
 // POST /api/inventory/stock-in - Add or update stock for a product at a branch
-router.post('/stock-in', authenticateToken, async (req: Request, res: Response) => {
+router.post('/stock-in', async (req: Request, res: Response) => {
   try {
     const { productId, branchId, quantity } = req.body;
 
