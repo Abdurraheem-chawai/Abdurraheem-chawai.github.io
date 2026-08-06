@@ -12,6 +12,7 @@ interface InventoryItem {
     name: string;
     sku: string;
     price: number;
+    sellingPrice?: number;
   };
   branch: {
     id: string;
@@ -150,7 +151,7 @@ export const InventoryScreen: React.FC = () => {
                   <td className="p-4 font-mono text-xs text-slate-500">{item.product?.sku || 'N/A'}</td>
                   <td className="p-4 font-semibold text-slate-800">{item.product?.name || 'Unknown'}</td>
                   <td className="p-4 text-slate-600">{item.branch?.name || 'Main Branch'}</td>
-                  <td className="p-4 font-medium text-slate-700">${Number(item.product?.sellingPrice ?? item.product?.price?? 0.).toFixed(2)}.toFixed(2)}</td>
+                  <td className="p-4 font-medium text-slate-700">${Number(item.product?.sellingPrice ?? item.product?.price?? 0.).toFixed(2)}</td>
                   <td className="p-4 text-center">
                     <span
                       className={`inline-block px-3 py-1 rounded-full text-xs font-bold ${
