@@ -1,8 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { ShoppingCart, Package, BarChart3, Users, Store } from 'lucide-react';
+import { ShoppingCart, Package, BarChart3, Users, Store, LogOut, User as UserIcon } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 export const Sidebar: React.FC = () => {
+  const { user, logout } = useAuth();
+
   const navItems = [
     { label: 'POS Checkout', path: '/', icon: ShoppingCart },
     { label: 'Inventory', path: '/inventory', icon: Package },
@@ -44,10 +47,24 @@ export const Sidebar: React.FC = () => {
         })}
       </nav>
 
-      {/* Branch Badge Footer */}
-      <div className="p-3 bg-slate-800 rounded-lg text-xs text-slate-400">
-        <p className="font-semibold text-slate-200">Active Branch:</p>
-        <p className="truncate">Main Supermarket Branch</p>
+      {/* Active User Footer & Logout */}
+      <div className="p-3 bg-slate-800 rounded-lg text-xs text-slate-300 mt-auto flex items-center justify-between">
+        <div className="flex items-center gap-2 overflow-hidden">
+          <div className="p-1.5 bg-emerald-500/20 text-emerald-400 rounded-md">
+            <UserIcon className="w-4 h-4" />
+          </div>
+          <div className="truncate">
+            <p className="font-semibold text-slate-100 truncate">{user?.name || 'Cashier'}</p>
+            <p className="text-[10px] text-emerald-400 uppercase font-bold">{user?.role || 'Staff'}</p>
+          </div>
+        </div>
+        <button
+          onClick={logout}
+          title="Log Out"
+          className="p-1.5 text-slate-400 hover:text-rose-400 hover:bg-slate-700/50 rounded-md transition"
+        >
+          <LogOut className="w-4 h-4" />
+        </button>
       </div>
     </aside>
   );
